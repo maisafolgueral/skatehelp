@@ -11,15 +11,19 @@ screen_height = 720
 screen = pg.display.set_mode((screen_width, screen_height))
 pg.display.set_caption('Skatehelp')
 
-# Imagem do carro
-car_image = pg.image.load("./assets/icons/cars/car#12.png").convert()
-car_image = pg.transform.scale(car_image, (108.4, 159.7))
+# Array com as imagens dos carros
+car_image_array = []
+for i in range(13):
+    car_image = pg.image.load(f"./assets/icons/cars/car#{i}.png").convert()
+    car_image = pg.transform.scale(car_image, (108.4, 159.7))
+    car_image_array.append(car_image)
 
+# Classe do Carro
 class Car():
     def __init__(self):
         self.position = pg.math.Vector2(480, -170)
         self.speed = 2
-        self.image = car_image
+        self.image = car_image_array[12]
         self.rect = self.image.get_rect()
         self.rect.center = self.position
 
