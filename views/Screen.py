@@ -1,6 +1,7 @@
 import pygame as pg
 from pygame.locals import *
 from config import screen_height, screen_width
+from EventHandler import event_handler
 
 class Screen():
     def __init__(self):
@@ -27,4 +28,12 @@ class Screen():
         self.background_y += self.background_speed
         if self.background_y >= screen_height:
             self.background_y -= screen_height
+
+    # Mostra o placar do jogo
+    def draw_score(self):
+        score = event_handler.score
+
+        font = pg.font.SysFont('Consolas', 36)
+        text_surface = font.render(f'SCORE: {score}', True, (255,255,255))
+        self.screen.blit(text_surface, (10, screen_height - 40))
 
