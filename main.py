@@ -21,7 +21,7 @@ def main():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 running = False
         
-        car_spawn_timer+=internal_clock
+        car_spawn_timer += internal_clock
         
         # Gera os carros
         if car_spawn_timer == 180:
@@ -29,6 +29,7 @@ def main():
             car_spawn_timer = 0
         
         screen.draw_background()
+        screen.draw_score()
 
         all_sprites.update()
         all_sprites.draw(screen.screen)

@@ -2,6 +2,7 @@ import pygame as pg
 from pygame.locals import *
 import random
 from config import screen_height
+from EventHandler import event_handler
 
 # Array com as imagens dos carros
 car_image_array = []
@@ -24,8 +25,9 @@ class Car(pg.sprite.Sprite):
         self.rect.center = self.position
 
     def update(self):
-        if self.alive == False or self.position.y >= screen_height + 170:
+        if self.alive == False or self.position.y >= screen_height + 180:
             print(self)
+            event_handler.update_score_car(self)
             self.kill()
 
         self.position.y += self.speed
