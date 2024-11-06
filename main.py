@@ -3,6 +3,7 @@ from pygame.locals import *
 from sys import exit
 from config import *
 from models import Car
+from models import Person
 from views import Screen
 
 pg.init()
@@ -13,6 +14,7 @@ def main():
 
     all_sprites = pg.sprite.Group()
     car_spawn_timer = 0
+    person_spawn_timer = 0
 
     screen = Screen.Screen()
 
@@ -22,11 +24,17 @@ def main():
                 running = False
         
         car_spawn_timer += internal_clock
+        person_spawn_timer += internal_clock
         
         # Gera os carros
         if car_spawn_timer == 180:
             Car.CarSpawn(all_sprites)
             car_spawn_timer = 0
+        
+        # Gera as pessoas
+        if person_spawn_timer == 180:
+            Person.PersonSpawn(all_sprites)
+            person_spawn_timer = 0
         
         screen.draw_background()
         screen.draw_score()
