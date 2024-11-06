@@ -47,7 +47,7 @@ class Player():
     def __init__(self):
         self.image = pg.image.load("./assets/icons/skater/skater_0.png").convert()
         self.image.set_colorkey((255, 255, 255)) # Faz o png ficar transparente
-        self.image = pg.transform.scale_by(self.image, 0.1) # Faz o scale proporcional da imagem
+        self.image = pg.transform.scale_by(self.image, 0.12) # Faz o scale proporcional da imagem
         self.position = pg.math.Vector2(screen_width // 2, screen_height - 100)
         self.speed = 5
         self.rect = self.image.get_rect(center=self.position)
