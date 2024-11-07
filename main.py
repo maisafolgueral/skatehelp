@@ -14,6 +14,7 @@ def main():
 
     all_sprites = pg.sprite.Group()
     car_spawn_timer = 0
+    person_spawn_timer = 0
 
     screen = Screen.Screen()
 
@@ -27,7 +28,8 @@ def main():
                 running = False
         
         car_spawn_timer += internal_clock
-    
+        person_spawn_timer += internal_clock
+
         # Movimentação da Dona Telma 
         skater.handle_keys()
         
@@ -35,6 +37,11 @@ def main():
         if car_spawn_timer == 180:
             Car.CarSpawn(all_sprites)
             car_spawn_timer = 0
+        
+        # Gera as pessoas
+        if person_spawn_timer == 180:
+            Person.PersonSpawn(all_sprites)
+            person_spawn_timer = 0
         
         screen.draw_background()
         screen.draw_score()
