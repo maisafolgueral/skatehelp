@@ -3,6 +3,7 @@ from pygame.locals import *
 from sys import exit
 from config import *
 from models import Car
+from models import Person
 from models.Skater import Skater
 from views import Screen
 
