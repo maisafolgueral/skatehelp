@@ -1,10 +1,11 @@
 import pygame as pg
 from pygame.locals import *
 from config import screen_height, screen_width
-from EventHandler import event_handler
 
 class Screen():
-    def __init__(self):
+    def __init__(self, event_handler):
+        self.event_handler = event_handler
+
         # Configuração da tela
         self.screen = pg.display.set_mode((screen_width, screen_height))
         pg.display.set_caption('Skatehelp')
@@ -31,8 +32,13 @@ class Screen():
 
     # Mostra o placar do jogo
     def draw_score(self):
-        score = event_handler.score
+        score = self.event_handler.score
 
         font = pg.font.SysFont('Consolas', 36)
         text_surface = font.render(f'SCORE: {score}', True, (255,255,255))
         self.screen.blit(text_surface, (10, screen_height - 40))
+
+    # Mostra todos os objetos
+    def draw_all(self):
+        self.draw_background()
+        self.draw_score()

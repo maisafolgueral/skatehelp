@@ -2,58 +2,47 @@ import pygame as pg
 from pygame.locals import *
 from sys import exit
 from config import *
-from models import Car
-from models import Person
 from models.Skater import Skater
 from views import Screen
+from EventHandler import EventHandler
 
 pg.init()
 
 def main():
     clock = pg.time.Clock()
-    running = True
-
     all_sprites = pg.sprite.Group()
-    car_spawn_timer = 0
-    person_spawn_timer = 0
 
-    screen = Screen.Screen()
+    event_handler = EventHandler()
 
-    # Adiciona a Dona Telma
+    screen = Screen.Screen(event_handler)
+
+    # Adiciona a Dona Telma.
     skater = Skater()
     all_sprites.add(skater)
 
-    while running:
+    while event_handler.running:
         for event in pg.event.get():
-            if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-                running = False
+            event_handler.quit_game(event)
         
-        car_spawn_timer += internal_clock
-        person_spawn_timer += internal_clock
+        # Atualiza os timers de cada elemento gerador.
+        event_handler.update_timers(internal_clock)
 
-        # Movimentação da Dona Telma 
+        # Movimentação da Dona Telma. 
         skater.handle_keys()
         
-        # Gera os carros
-        if car_spawn_timer == 180:
-            Car.CarSpawn(all_sprites)
-            car_spawn_timer = 0
+        # Gera todos os obstaculos no jogo.
+        event_handler.spawn_obstacles(all_sprites)
         
-        # Gera as pessoas
-        if person_spawn_timer == 180:
-            Person.PersonSpawn(all_sprites)
-            person_spawn_timer = 0
-        
-        screen.draw_background()
-        screen.draw_score()
+        # Gera o background e o placar do jogo.
+        screen.draw_all()
 
+        # Atualiza o jogo.
         all_sprites.update()
         all_sprites.draw(screen.screen)
-        
 
-        # Atualiza a tela
+        # Atualiza a tela.
         pg.display.flip()
-        clock.tick(60) # 60 frames por segundo
+        clock.tick(60) # 60 frames por segundo.
 
     pg.quit()
     exit()

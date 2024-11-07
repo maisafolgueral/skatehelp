@@ -2,7 +2,6 @@ import pygame as pg
 from pygame.locals import *
 import random
 from config import screen_height
-from EventHandler import event_handler
 
 # Array com as imagens das pessoas
 person_image_array = []
@@ -18,8 +17,9 @@ for i in range(3):
 
 # Classe das pessoas
 class Person(pg.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, event_handler):
         super(Person,self).__init__()
+        self.event_handler = event_handler
         self.alive = True
         self.image = random.choice(person_image_array)
         self.allowed_x_positions = [285, 990]
@@ -29,8 +29,9 @@ class Person(pg.sprite.Sprite):
         self.rect.center = self.position
 
     def update(self):
-        if self.alive == False or self.position.y >= screen_height + 170:
+        if self.alive == False or self.position.y >= screen_height + 10:
             print(self)
+            self.event_handler.update_score_person()
             self.kill()
         
         self.position.y += self.speed
@@ -39,6 +40,6 @@ class Person(pg.sprite.Sprite):
     def draw(self, screen):
         screen.blit(self.image, self.rect)
 
-def PersonSpawn(all_sprites):
-    person = Person()
+def PersonSpawn(all_sprites, event_handler):
+    person = Person(event_handler)
     all_sprites.add(person)

@@ -2,7 +2,6 @@ import pygame as pg
 from pygame.locals import *
 import random
 from config import screen_height
-from EventHandler import event_handler
 
 # Array com as imagens dos carros
 car_image_array = []
@@ -18,8 +17,9 @@ for i in range(13):
 
 # Classe do Carro
 class Car(pg.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, event_handler):
         super(Car,self).__init__()
+        self.event_handler = event_handler
         self.alive = True
         self.image = random.choice(car_image_array)
         self.allowed_x_positions = [480, 800]
@@ -31,7 +31,7 @@ class Car(pg.sprite.Sprite):
     def update(self):
         if self.alive == False or self.position.y >= screen_height + 180:
             print(self)
-            event_handler.update_score_car(self)
+            self.event_handler.update_score_car()
             self.kill()
 
         self.position.y += self.speed
@@ -40,6 +40,6 @@ class Car(pg.sprite.Sprite):
     def draw(self, screen):
         screen.blit(self.image, self.rect)
 
-def CarSpawn(all_sprites):
-    car = Car()
+def CarSpawn(all_sprites, event_handler):
+    car = Car(event_handler)
     all_sprites.add(car)
