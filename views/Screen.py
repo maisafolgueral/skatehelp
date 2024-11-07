@@ -11,7 +11,7 @@ class Screen():
         
         # Variáveis para movimento do background
         self.background_y = 0
-        self.background_speed = 2
+        self.background_speed = 1
         
         # Carregar a imagem de fundo
         self.background = pg.image.load("./assets/bgs/bg#0.jpg")
@@ -36,4 +36,3 @@ class Screen():
         font = pg.font.SysFont('Consolas', 36)
         text_surface = font.render(f'SCORE: {score}', True, (255,255,255))
         self.screen.blit(text_surface, (10, screen_height - 40))
-
