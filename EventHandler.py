@@ -7,7 +7,6 @@ class EventHandler:
         self.score = 0
 
     def update_score_car(self, object):
-        if object.position.y >= screen_height + 170:
-            self.score += 20
+        self.score += 20
 
 event_handler = EventHandler()
