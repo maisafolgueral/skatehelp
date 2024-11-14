@@ -1,7 +1,7 @@
+import pygame as pg
+from pygame.locals import *
 from models import Car
 from models import Person
-from pygame.locals import *
-from config import screen_height
 
 class EventHandler:
     def __init__(self) -> None:
@@ -12,6 +12,11 @@ class EventHandler:
 
     def quit_game(self, event):
         if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+            self.running = False
+        
+    def on_collide(self, skater, obstacles):
+        if pg.sprite.spritecollideany(skater, obstacles):
+            print("Colisão detectada! Jogo encerrado.")
             self.running = False
     
     def update_score_car(self):
@@ -24,16 +29,16 @@ class EventHandler:
         self.car_spawn_timer += internal_clock
         self.person_spawn_timer += internal_clock
 
-    def spawn_cars(self, all_sprites):
+    def spawn_cars(self, all_sprites, obstacle_sprites):
         if self.car_spawn_timer == 180:
-            Car.CarSpawn(all_sprites, self)
+            Car.CarSpawn(all_sprites, obstacle_sprites, self)
             self.car_spawn_timer = 0
 
-    def spawn_people(self, all_sprites):
+    def spawn_people(self, all_sprites, obstacle_sprites):
         if self.person_spawn_timer == 180:
-            Person.PersonSpawn(all_sprites, self)
+            Person.PersonSpawn(all_sprites, obstacle_sprites, self)
             self.person_spawn_timer = 0
     
-    def spawn_obstacles(self, all_sprites):
-        self.spawn_cars(all_sprites)
-        self.spawn_people(all_sprites)
+    def spawn_obstacles(self, all_sprites, obstacle_sprites):
+        self.spawn_cars(all_sprites, obstacle_sprites)
+        self.spawn_people(all_sprites, obstacle_sprites)

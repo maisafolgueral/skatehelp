@@ -40,6 +40,7 @@ class Car(pg.sprite.Sprite):
     def draw(self, screen):
         screen.blit(self.image, self.rect)
 
-def CarSpawn(all_sprites, event_handler):
+def CarSpawn(all_sprites, obstacle_sprites, event_handler):
     car = Car(event_handler)
     all_sprites.add(car)
+    obstacle_sprites.add(car)

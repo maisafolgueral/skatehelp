@@ -40,6 +40,7 @@ class Person(pg.sprite.Sprite):
     def draw(self, screen):
         screen.blit(self.image, self.rect)
 
-def PersonSpawn(all_sprites, event_handler):
+def PersonSpawn(all_sprites, obstacle_sprites, event_handler):
     person = Person(event_handler)
     all_sprites.add(person)
+    obstacle_sprites.add(person)

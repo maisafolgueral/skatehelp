@@ -10,7 +10,9 @@ pg.init()
 
 def main():
     clock = pg.time.Clock()
+    
     all_sprites = pg.sprite.Group()
+    obstacle_sprites = pg.sprite.Group()
 
     event_handler = EventHandler()
 
@@ -31,7 +33,7 @@ def main():
         skater.handle_keys()
         
         # Gera todos os obstaculos no jogo.
-        event_handler.spawn_obstacles(all_sprites)
+        event_handler.spawn_obstacles(all_sprites, obstacle_sprites)
         
         # Gera o background e o placar do jogo.
         screen.draw_all()
@@ -39,6 +41,9 @@ def main():
         # Atualiza o jogo.
         all_sprites.update()
         all_sprites.draw(screen.screen)
+
+        # Verificação de colisão
+        event_handler.on_collide(skater, obstacle_sprites)
 
         # Atualiza a tela.
         pg.display.flip()
