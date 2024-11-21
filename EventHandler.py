@@ -24,7 +24,6 @@ class EventHandler:
         
     def on_collide(self, skater, obstacles):
         if pg.sprite.spritecollideany(skater, obstacles):
-            print("Colisão detectada! Jogo encerrado.")
             self.running = False
             self.game_over = True
     

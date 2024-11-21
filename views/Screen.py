@@ -38,18 +38,22 @@ class Screen():
         text_surface = self.font.render(f'SCORE: {score}', True, (255,255,255))
         self.screen.blit(text_surface, (10, screen_height - 40))
 
-    # Mostrar o menu.
+    # Mostrar o menu
     def show_menu(self):
-        text_surface = self.font.render('PRESS SPACE TO PLAY', True, (255,255,255))
-        self.screen.fill((0,0,0))
-        self.screen.blit(text_surface, (screen_width / 2.85, screen_height / 2.10))
+        background_image = pg.image.load('./assets/bgs/bg#menu.jpg')
+        text_surface = self.font.render('PRESS SPACE TO PLAY', True, (0, 0, 0))
+        text_rect = text_surface.get_rect(center=(screen_width // 2, screen_height // 2))
+        self.screen.blit(background_image, (0, 0)) 
+        self.screen.blit(text_surface, text_rect.topleft)
         pg.display.flip()
 
-    # Mostrar o menu.
+    # Mostrar o menu
     def show_game_over_screen(self):
-        text_surface = self.font.render('GAME OVER', True, (255,255,255))
-        self.screen.fill((0,0,0))
-        self.screen.blit(text_surface, (screen_width / 2.35, screen_height / 2))
+        background_image = pg.image.load('./assets/bgs/bg#menu.jpg')
+        text_surface = self.font.render('GAME OVER', True, (0, 0, 0))
+        text_rect = text_surface.get_rect(center=(screen_width // 2, screen_height // 2))
+        self.screen.blit(background_image, (0, 0)) 
+        self.screen.blit(text_surface, text_rect.topleft)
         pg.display.flip()
 
     # Mostra todos os objetos
