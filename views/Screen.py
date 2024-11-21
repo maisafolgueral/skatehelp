@@ -18,6 +18,8 @@ class Screen():
         self.background = pg.image.load("./assets/bgs/bg#0.jpg")
         self.background = pg.transform.scale(self.background, (screen_width, screen_height))
 
+        self.font = pg.font.SysFont('Consolas', 36)
+
     # Desenha o fundo
     def draw_background(self):
         self.move_background()
@@ -33,10 +35,15 @@ class Screen():
     # Mostra o placar do jogo
     def draw_score(self):
         score = self.event_handler.score
-
-        font = pg.font.SysFont('Consolas', 36)
-        text_surface = font.render(f'SCORE: {score}', True, (255,255,255))
+        text_surface = self.font.render(f'SCORE: {score}', True, (255,255,255))
         self.screen.blit(text_surface, (10, screen_height - 40))
+
+    # Mostrar o menu.
+    def show_menu(self):
+        text_surface = self.font.render('PRESS SPACE TO PLAY', True, (255,255,255))
+        self.screen.fill((0,0,0))
+        self.screen.blit(text_surface, (screen_width // 2, screen_height // 2))
+        pg.display.flip()
 
     # Mostra todos os objetos
     def draw_all(self):

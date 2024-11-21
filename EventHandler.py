@@ -2,17 +2,24 @@ import pygame as pg
 from pygame.locals import *
 from models import Car
 from models import Person
+from models import Skater
 
 class EventHandler:
     def __init__(self) -> None:
         self.running = True
+        self.menu_showing = True
         self.score = 0
         self.car_spawn_timer = 0
         self.person_spawn_timer = 0
 
+    def start_or_stop(self, event):
+        if event.type == KEYDOWN and event.key == K_SPACE:
+            self.menu_showing = False if self.menu_showing else True
+
     def quit_game(self, event):
         if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
             self.running = False
+            exit()
         
     def on_collide(self, skater, obstacles):
         if pg.sprite.spritecollideany(skater, obstacles):
