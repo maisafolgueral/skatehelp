@@ -28,13 +28,13 @@ class Car(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = self.position
 
-    def update(self):
+    def update(self, internal_clock):
         if self.alive == False or self.position.y >= screen_height + 180:
             print(self)
             self.event_handler.update_score_car()
             self.kill()
 
-        self.position.y += self.speed
+        self.position.y += (self.speed * internal_clock)
         self.rect.center = self.position
     
     def draw(self, screen):

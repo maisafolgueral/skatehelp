@@ -21,14 +21,14 @@ class Screen():
         self.font = pg.font.SysFont('Consolas', 36)
 
     # Desenha o fundo
-    def draw_background(self):
-        self.move_background()
+    def draw_background(self, internal_clock):
+        self.move_background(internal_clock)
         self.screen.blit(self.background, (0, self.background_y))
         self.screen.blit(self.background, (0, self.background_y - screen_height))
 
     # Atualiza a posição do fundo
-    def move_background(self):
-        self.background_y += self.background_speed
+    def move_background(self, internal_clock):
+        self.background_y += (self.background_speed * internal_clock)
         if self.background_y >= screen_height:
             self.background_y -= screen_height
 
@@ -42,10 +42,17 @@ class Screen():
     def show_menu(self):
         text_surface = self.font.render('PRESS SPACE TO PLAY', True, (255,255,255))
         self.screen.fill((0,0,0))
-        self.screen.blit(text_surface, (screen_width // 2, screen_height // 2))
+        self.screen.blit(text_surface, (screen_width / 2.85, screen_height / 2.10))
+        pg.display.flip()
+
+    # Mostrar o menu.
+    def show_game_over_screen(self):
+        text_surface = self.font.render('GAME OVER', True, (255,255,255))
+        self.screen.fill((0,0,0))
+        self.screen.blit(text_surface, (screen_width / 2.35, screen_height / 2))
         pg.display.flip()
 
     # Mostra todos os objetos
-    def draw_all(self):
-        self.draw_background()
+    def draw_all(self, internal_clock):
+        self.draw_background(internal_clock)
         self.draw_score()

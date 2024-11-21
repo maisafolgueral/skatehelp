@@ -3,4 +3,4 @@ screen_width = 1280
 screen_height = 720
 
 # Relógio interno do jogo
-internal_clock = 1
+# internal_clock = 1

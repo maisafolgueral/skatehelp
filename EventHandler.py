@@ -8,6 +8,7 @@ class EventHandler:
     def __init__(self) -> None:
         self.running = True
         self.menu_showing = True
+        self.game_over = False
         self.score = 0
         self.car_spawn_timer = 0
         self.person_spawn_timer = 0
@@ -25,6 +26,7 @@ class EventHandler:
         if pg.sprite.spritecollideany(skater, obstacles):
             print("Colisão detectada! Jogo encerrado.")
             self.running = False
+            self.game_over = True
     
     def update_score_car(self):
         self.score += 20
@@ -37,12 +39,12 @@ class EventHandler:
         self.person_spawn_timer += internal_clock
 
     def spawn_cars(self, all_sprites, obstacle_sprites):
-        if self.car_spawn_timer == 180:
+        if self.car_spawn_timer >= 180:
             Car.CarSpawn(all_sprites, obstacle_sprites, self)
             self.car_spawn_timer = 0
 
     def spawn_people(self, all_sprites, obstacle_sprites):
-        if self.person_spawn_timer == 180:
+        if self.person_spawn_timer >= 180:
             Person.PersonSpawn(all_sprites, obstacle_sprites, self)
             self.person_spawn_timer = 0
     
