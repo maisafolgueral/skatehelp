@@ -30,5 +30,5 @@ class Skater(pg.sprite.Sprite):
         
         self.rect.center = self.position
 
-    def draw(self):
+    def draw(self, screen):
         screen.blit(self.image, self.rect)

@@ -25,7 +25,18 @@ def main():
     while event_handler.running:
         for event in pg.event.get():
             event_handler.quit_game(event)
-        
+            event_handler.start_or_stop(event)
+            
+            while event_handler.menu_showing:
+                event_handler.quit_game(event)
+                event_handler.start_or_stop(event)
+                print(f'{event_handler.menu_showing}')
+                
+                for object in all_sprites:
+                    object.speed = 0
+
+                screen.show_menu()
+
         # Atualiza os timers de cada elemento gerador.
         event_handler.update_timers(internal_clock)
 
