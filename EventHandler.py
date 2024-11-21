@@ -19,6 +19,7 @@ class EventHandler:
     def quit_game(self, event):
         if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
             self.running = False
+            exit()
         
     def on_collide(self, skater, obstacles):
         if pg.sprite.spritecollideany(skater, obstacles):

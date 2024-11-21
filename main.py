@@ -10,6 +10,7 @@ pg.init()
 
 def main():
     clock = pg.time.Clock()
+    internal_clock = 1
     
     all_sprites = pg.sprite.Group()
     obstacle_sprites = pg.sprite.Group()
@@ -28,13 +29,10 @@ def main():
             event_handler.start_or_stop(event)
             
             while event_handler.menu_showing:
-                event_handler.quit_game(event)
-                event_handler.start_or_stop(event)
-                print(f'{event_handler.menu_showing}')
-                
-                for object in all_sprites:
-                    object.speed = 0
-
+                pg.time.delay(100) # delay para impedir o jogo de crashar
+                for event in pg.event.get():
+                    event_handler.quit_game(event)
+                    event_handler.start_or_stop(event)
                 screen.show_menu()
 
         # Atualiza os timers de cada elemento gerador.
